@@ -20,27 +20,26 @@ const handler = NextAuth({
       return session;
     },
     async signIn({ account, profile, user, credentials }) {
-      try {
-        await connectToDB();
-
-        // check if user already exists
-        const userExists = await User.findOne({ email: profile.email });
-
-        // if not, create a new document and save user in MongoDB
-        if (!userExists) {
-          await User.create({
-            email: profile.email,
-            username: profile.name.replace(" ", "").toLowerCase(),
-            image: profile.picture,
-          });
+        try {
+          await connectToDB();
+          const userExists = await User.findOne({ email: profile.email });
+          if (!userExists) {
+            await User.create({
+              email: profile.email,
+              username: profile.name.replace(" ", "").toLowerCase(),
+              image: profile.picture,
+            });
+          }
+          return true;
+        } catch (error) {
+          if (error.code === 11000) { // Duplicate key error code
+            console.log('Email already exists');
+          }
+          console.log("Error signing in user: ", error.message);
+          return false;
         }
-
-        return true
-      } catch (error) {
-        console.log("Error checking if user exists: ", error.message);
-        return false
       }
-    },
+      
   }
 })
 
