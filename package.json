@@ -9,11 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "mongodb": "^6.10.0",
     "mongoose": "^8.8.1",
-    "next": "15.0.3",
+    "next": "^15.0.3",
     "next-auth": "^4.24.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "regenerate-unicode-properties": "^10.2.0",
     "styled-jsx": "^5.1.6"
   },
   "devDependencies": {

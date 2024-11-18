@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": ".", // Base path is the root of the project
     "paths": {
-      "@*": ["./*"]
+      "@styles/*": ["styles/*"],       // For importing CSS or style files
+      "@components/*": ["components/*"], // For importing components
+      "@utils/*": ["utils/*"],         // Add other aliases as needed
+      "@models/*": ["models/*"]
     }
   }
 }
- 
