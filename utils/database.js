@@ -9,16 +9,12 @@ export const connectToDB = async  () =>  {
       
 
     if (isConnected){ 
-        console.log(" mongoDb is connected ")
+        console.log(" mongoDb has been connected while in the connected ")
         return;
     }
 
     try  {
-        await mongoose.connect(process.env.MONGODB_URI, {
-            dbName : "share_prompt",
-            useNewUrlParser: true,
-            useUnifiedTopology:true, 
-        })
+        await mongoose.connect(process.env.MONGODB_URI);
 
         isConnected = true;
 

@@ -5,7 +5,14 @@ const nextConfig = {
   },
   serverExternalPackages: ["mongoose", "styled-jsx"], // Moved out of experimental
   images: {
-    domains: ["lh3.googleusercontent.com"],
+    remotePatterns: [
+      { 
+         hostname:"lh3.googleusercontent.com",
+         protocol:"https",
+         pathname:"/**" //allows all paths from this domain
+      }
+     
+    ],
   },
   webpack(config) {
     config.experiments = {
