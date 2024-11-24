@@ -26,9 +26,10 @@ const PromptCardList = ({ data, handleTagClick}) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState('');
   const [posts, setPosts] = useState([]);
-   const handleSearchChange = (e) => {
+  const [filteredPosts, setFilteredPosts] = useState([])
 
-   }
+
+ 
 
    useEffect(() => {
     const fetchPrompts = async () => {
@@ -36,10 +37,29 @@ const Feed = () => {
       const data = await res.json();
 
       setPosts(data);
+      setFilteredPosts(data)
 
     }
     fetchPrompts();
    },[])
+
+   const handleSearchChange = (e) => {
+
+    const searchValue = e.target.value.toLowerCase();
+    setSearchText(searchValue);
+
+    const filtered = posts.filter(
+      (post) => 
+      post.creator.username.toLowerCase().includes(searchValue) || 
+      post.tag.toLowerCase().includes(searchValue)
+      
+    )
+
+    setFilteredPosts(filtered);
+
+   }
+
+
   return (
     <section  className='feed '>
 
@@ -55,7 +75,7 @@ const Feed = () => {
 
       </form>
       <PromptCardList
-          data={posts}//posts that were set on the aync effect for  fetch
+          data={filteredPosts}//using the filtered post instead
           handleTagClick= {() => {}}
 
       />
